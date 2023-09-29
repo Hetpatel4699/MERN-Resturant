@@ -4,6 +4,7 @@ import { BiShow, BiHide } from "react-icons/bi";
 import { Link,useNavigate } from "react-router-dom";
 import { ImagetoBase64 } from "../utility/ImagetoBase64";
 
+
 const Signup = () => {
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
@@ -62,7 +63,7 @@ const Signup = () => {
         
         const dataRes = await fetchData.json()
         console.log(dataRes)
-        alert("successfull")
+        alert(dataRes.message)
         // navigate("/login")
       }
       else{
