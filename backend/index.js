@@ -5,7 +5,7 @@ const dotenv = require ("dotenv").config()
 
 const app = express()
 app.use(cors())
-app.use(express.json({}))
+app.use(express.json({limit: '10mb' }))
 
 const PORT = process.env.PORT || 8080
 //mongodb_connection
@@ -44,7 +44,7 @@ app.post("/signup",(req,res)=>{
         console.log(err)
         if(result){
             res.send({message : "Email id is already register"})
-        }
+        }   
         else{
             const data = userModel(req.body)
             const save = data.save()
