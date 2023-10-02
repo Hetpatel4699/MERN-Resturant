@@ -43,7 +43,7 @@ const Login = () => {
     <div className="w-full max-w-md  bg-white m-auto flex flex-col p-4">
       {/* <h1 className='text-center text-2xl font-bold'>Signup</h1> */}
       <div className="w-20 overflow-hidden rounded-full drop-shadow-md shadow-md m-auto">
-        <img src={loginSignupImage} className="w-full" />
+        <img src={loginSignupImage} className="w-full" alt="" />
       </div>
 
       <form className="w-full py-3 flex flex-col" onSubmit={handleSubmit}>
