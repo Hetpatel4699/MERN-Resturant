@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import loginSignupImage from "../assest/login-animation.gif";
 import { BiShow, BiHide } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+
+
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [data, setData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
+
+  const navigate = useNavigate()
   console.log(data)
+
+const userData = useSelector(state => state)
+console.log(userData.user)
+const dispatch = useDispatch()
+
+
   const handleShowpassword = () => {
     setShowPassword((preve) => !preve);
   };
@@ -28,11 +37,28 @@ const Login = () => {
       })
   }
 
-  const handleSubmit =(e)=>{
+  const handleSubmit =async(e)=>{
     e.preventDefault()
     const{email,password} = data
     if(email && password ){
-        alert("successfull")
+      const fetchData = await fetch(`${process.env.REACT_APP_SERVER_DOMAIN}/login`, {
+        method: "POST",                 
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+
+    const dataRes = await fetchData.json()
+    console.log(dataRes)
+    toast(dataRes.message)
+
+    if(dataRes.alert){
+      dispatch(dataRes)
+      setTimeout(() => {
+        navigate("/")
+      },1000);
+    }
     }
     else{
       alert("please enter required field")
@@ -58,7 +84,7 @@ const Login = () => {
         ></input>
 
         <label htmlFor="password">Password</label>
-        <div className="flex px-2 py-1 rounded bg-slate-200 mt-1 mb-2 focus-within:outline focus-within:outline-blue-300">
+        <div className="flex px-2 py-1 rounded bg-slate-200 mt-1 mb-2 focus-within:outline focus-within:outline-blue-300">  
           <input
             type={showPassword ? "text" : "password"}
             id="password"

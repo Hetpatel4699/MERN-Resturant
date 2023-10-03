@@ -15,6 +15,8 @@ import Contact from "./page/Contact";
 import Login from "./page/login";
 import Newproduct from "./page/Newproduct";
 import Signup from "./page/Signup";
+import { Provider } from "react-redux";
+import { store } from "./redux/index";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,5 +34,7 @@ const router = createBrowserRouter(
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <RouterProvider router={router} />
+  <Provider store={store}>
+  <RouterProvider router={router} />
+  </Provider>
 );
