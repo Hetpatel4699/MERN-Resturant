@@ -4,6 +4,7 @@ import { BiShow, BiHide } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { loginRedux } from "../redux/userSlice";
 
 
 
@@ -15,10 +16,9 @@ const Login = () => {
   });
 
   const navigate = useNavigate()
-  console.log(data)
+  const userData = useSelector(state => state)
+  // console.log(data)
 
-const userData = useSelector(state => state)
-console.log(userData.user)
 const dispatch = useDispatch()
 
 
@@ -52,13 +52,14 @@ const dispatch = useDispatch()
     const dataRes = await fetchData.json()
     console.log(dataRes)
     toast(dataRes.message)
-
+    
     if(dataRes.alert){
-      dispatch(dataRes)
+      dispatch(loginRedux(dataRes))
       setTimeout(() => {
         navigate("/")
       },1000);
     }
+    console.log(userData)
     }
     else{
       alert("please enter required field")
