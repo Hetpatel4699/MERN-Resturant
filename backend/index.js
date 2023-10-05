@@ -80,5 +80,24 @@ app.post("/login", (req, res) => {
 })
 
 
+
+//product secton
+const schemaProduct = mongoose.Schema({
+    name: String,
+    category: String,
+    image: String,
+    price: String,
+    description: String,
+})
+
+const productModle = mongoose.model("product",schemaProduct)
+
+
+//save product in data
+//api
+app.post("uploadProduct",(req,res)=>{
+    console.log(req.body)
+})
+
 //server is running
 app.listen(PORT, () => console.log("server is running at port :" + PORT))
