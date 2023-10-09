@@ -101,10 +101,11 @@ app.post("/uploadProduct",async(req,res)=>{
 })
 
 // 
-// app.get("/product",async(req,res)=>{
+app.get("/product",async(req,res)=>{
+    const data = await productModel.find({})
+    res.send(JSON.stringify(data))
 //     const data = await productModel.find({})
-//     res.send(JSON.stringify(data))
-// })
+})
 
 //server is running
 app.listen(PORT, () => console.log("server is running at port : " + PORT))
